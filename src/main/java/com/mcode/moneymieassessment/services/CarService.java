@@ -4,15 +4,19 @@ package com.mcode.moneymieassessment.services;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mcode.moneymieassessment.exceptions.MMAExceptions;
 import com.mcode.moneymieassessment.model.Car;
 import org.apache.commons.io.FileUtils;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 
 import java.io.*;
 import java.lang.reflect.Type;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -40,18 +44,24 @@ public class CarService {
         return sorted;
     }
 
-    public Car createCar(Car car) throws IOException {
+    public String createCar(Car car) throws IOException {
         List<Car> cars = getCarsFromFile();
-        System.out.println("initial size =>"+cars.size());
-        Car newCar = new Car();
-        newCar.setVin(car.getVin());
-        newCar.setBrand(car.getBrand());
-        newCar.setYear(car.getYear());
-        newCar.setColor(car.getColor());
-        cars.add(newCar);
-        System.out.println("after size =>"+cars.size());
+        Car returnedCar = new Car();
+        Car existingCar = cars.stream()
+                .filter((c)->car.getVin().equals(c.getVin()))
+                .findAny()
+                .orElse(null);
+        if(existingCar != null)
+            throw new MMAExceptions("vin already exist");
+            Car newCar = new Car();
+            newCar.setVin(car.getVin());
+            newCar.setBrand(car.getBrand());
+            newCar.setYear(car.getYear());
+            newCar.setColor(car.getColor());
+            cars.add(newCar);
+            returnedCar = newCar;
         mapper.writeValue(new File(filePath), cars);
-        return newCar;
+        return "created successfully";
     }
 
 

@@ -2,6 +2,7 @@ package com.mcode.moneymieassessment.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.intellij.lang.annotations.Identifier;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 

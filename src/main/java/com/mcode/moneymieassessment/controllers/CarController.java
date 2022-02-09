@@ -22,7 +22,7 @@ public class CarController {
 
 
     @PostMapping(value = "/save", consumes = {"application/json"})
-    public Car createCar(@RequestBody Car car) throws IOException {
+    public String createCar(@RequestBody Car car) throws IOException {
         return carService.createCar(car);
     }
 
