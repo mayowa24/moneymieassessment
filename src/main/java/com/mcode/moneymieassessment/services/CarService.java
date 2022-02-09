@@ -23,7 +23,7 @@ import java.util.stream.Stream;
 @Service
 public class CarService {
     private ObjectMapper mapper = new ObjectMapper();
-    private final String filePath = "C://Users/Mayor/Documents/Capricorn/moneymieassessment/src/main/resources/car-file/cars-large.json";
+    private final String filePath = "moneymieassessment/src/main/resources/car-file/cars-large.json";
 
     private List<Car> cars;
     public List<Car> getCarsFromFile() throws IOException {
