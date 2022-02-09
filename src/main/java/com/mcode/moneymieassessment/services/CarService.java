@@ -55,7 +55,7 @@ public class CarService {
             throw new MMAExceptions("vin already exist");
             Car newCar = new Car();
             newCar.setVin(car.getVin());
-            newCar.setBrand(car.getBrand());
+          newCar.setBrand(car.getBrand());
             newCar.setYear(car.getYear());
             newCar.setColor(car.getColor());
             cars.add(newCar);
