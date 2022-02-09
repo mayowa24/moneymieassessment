@@ -69,7 +69,7 @@ public class CarService {
         List<Car> filteredCars = null;
         if(brand != null){
             List<Car> car = allCars.stream()
-                    .filter((c)->brand.equals(c.getBrand()))
+                    .filter((c)->brand.equalsIgnoreCase(c.getBrand()))
                     .collect(Collectors.toList());
             filteredCars = car;
         }
@@ -82,13 +82,13 @@ public class CarService {
         }
         if(color != null){
             List<Car> car2 = allCars.stream()
-                    .filter((c)->color.equals(c.getColor()))
+                    .filter((c)->color.equalsIgnoreCase(c.getColor()))
                     .collect(Collectors.toList());
             filteredCars = car2;
         }
         if(brand != null && year !=null && color != null){
             List<Car> cars = allCars.stream().filter(car -> {
-                if(brand.equals(car.getBrand()) || Integer.parseInt(year) ==car.getYear()|| color.equals(car.getColor())){
+                if(brand.equalsIgnoreCase(car.getBrand()) || Integer.parseInt(year) ==car.getYear()|| color.equalsIgnoreCase(car.getColor())){
                     return true;
                 }else{
                     return false;
@@ -105,7 +105,7 @@ public class CarService {
         List<Car> filteredCars = null;
         if(brand != null){
             List<Car> car = allCars.stream()
-                    .filter((c)->brand.equals(c.getBrand()))
+                    .filter((c)->brand.equalsIgnoreCase(c.getBrand()))
                     .collect(Collectors.toList());
             //filteredCars = car;
             if(order.equalsIgnoreCase("asc")){

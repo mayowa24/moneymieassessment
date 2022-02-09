@@ -20,6 +20,7 @@ public class CarController {
         return carService.getAllCars();
     }
 
+
     @PostMapping(value = "/save", consumes = {"application/json"})
     public Car createCar(@RequestBody Car car) throws IOException {
         return carService.createCar(car);
